@@ -5,6 +5,7 @@ public class Glutton {
     public Glutton()
     {
         solution = new Solution();
+        solution = remplirEmplois();
     }
 
     public Solution remplirEmplois()
@@ -112,5 +113,10 @@ public class Glutton {
             }
         }
         return false;
+    }
+
+    public Solution getSolution()
+    {
+        return solution;
     }
 }
