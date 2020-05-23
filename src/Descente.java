@@ -2,8 +2,7 @@ import java.util.ArrayList;
 
 public class Descente {
 
-    public static Solution Descente() {
-        Glutton glutton = new Glutton();
+    public static Solution descente(Glutton glutton) {
         Solution meilleurVois = glutton.getSolution();
         boolean solutionAmelioree = false;
         do {

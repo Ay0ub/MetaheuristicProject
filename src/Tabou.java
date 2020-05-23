@@ -4,8 +4,7 @@ public class Tabou {
     private static final int MAX_ITER = 60;
     private static ArrayList<Solution> listSolution = new ArrayList<>();
 
-    public static Solution algoTabou() {
-        Glutton glutton = new Glutton();
+    public static Solution tabou(Glutton glutton) {
         Solution meilleurVois = glutton.getSolution();
         int cpt = 0;
         do {
@@ -19,8 +18,6 @@ public class Tabou {
             }
             cpt++;
         } while(cpt  < MAX_ITER);
-        System.out.println("Resultat de la fonction objectif : " + meilleurVois.fontionObjectif() );
         return meilleurVois;
-
     }
 }

@@ -30,7 +30,7 @@ public class Voisinage {
             groupePrepaCours1 = random.nextInt(Solution.nbrGroupesPrepaCours);
             groupePrepaTD1 = random.nextInt(Solution.nbrGroupesPrepaTD);
             amphi1 = random.nextInt(Solution.nbrAmphi);
-        }while (vois.x[prof1][jour1][seance1][salle1][module1][groupeCycle1]==1 || vois.y[prof1][jour1][seance1][salle1][module1][groupePrepaTD1]==1 || vois.z[prof1][jour1][amphi1][salle1][module1][groupePrepaCours1]==1);
+        }while (vois.x[prof1][seance1][jour1][salle1][module1][groupeCycle1]==1 || vois.y[prof1][seance1][jour1][salle1][module1][groupePrepaTD1]==1 || vois.z[prof1][seance1][jour1][amphi1][module1][groupePrepaCours1]==1);
 
         do{
             jour2 = random.nextInt(Solution.nbrJours);
@@ -41,38 +41,38 @@ public class Voisinage {
             groupePrepaCours2 = random.nextInt(Solution.nbrGroupesPrepaCours);
             groupePrepaTD2 = random.nextInt(Solution.nbrGroupesPrepaTD);
             amphi2 = random.nextInt(Solution.nbrAmphi);
-        }while (vois.x[prof2][jour2][seance2][salle2][module2][groupeCycle2]==1 || vois.y[prof2][jour2][seance2][salle2][module2][groupePrepaTD2]==1 || vois.z[prof2][jour2][amphi2][salle2][module2][groupePrepaCours2]==1);
+        }while (vois.x[prof2][seance2][jour2][salle2][module2][groupeCycle2]==1 || vois.y[prof2][seance2][jour2][salle2][module2][groupePrepaTD2]==1 || vois.z[prof2][seance2][jour2][amphi2][module2][groupePrepaCours2]==1);
 
-        if(vois.x[prof1][jour1][seance1][salle1][module1][groupeCycle1] == 1) //La seance a retirer pour le prof1 est une seance de TD
+        if(vois.x[prof1][seance1][jour1][salle1][module1][groupeCycle1] == 1)
         {
-            vois.x[prof1][jour1][seance1][salle1][module1][groupeCycle1] = 0; //désaffecter la seance de TD du prof1
-            if(vois.x[prof2][jour2][seance2][salle2][module2][groupeCycle2] == 1) //La seance a retirer pour le prof 2 est une seance de TD
+            vois.x[prof1][seance1][jour1][salle1][module1][groupeCycle1] = 0;
+            if(vois.x[prof2][seance2][jour2][salle2][module2][groupeCycle2] == 1)
             {
-                vois.x[prof2][jour2][seance2][salle2][module2][groupeCycle2] = 0; //désaffecter la seance de TD du prof2
-                vois.x[prof1][jour2][seance2][salle2][module2][groupeCycle2] = 1; //Donner au prof1 la seance de TD du prof2
-                vois.x[prof2][jour1][seance1][salle1][module1][groupeCycle1] = 1; //Donner au prof2 la seance de TD du prof1
+                vois.x[prof2][seance2][jour2][salle2][module2][groupeCycle2] = 0;
+                vois.x[prof1][seance2][jour2][salle2][module2][groupeCycle2] = 1;
+                vois.x[prof2][seance1][jour1][salle1][module1][groupeCycle1] = 1;
             }
-            else //La seance a retirer pour le prof 2 est une seance de cours
+            else
             {
-                vois.y[prof2][jour2][seance2][amphi2][module2][groupePrepaTD2] = 0; //désaffecter la seance de cours du prof2
-                vois.y[prof1][jour2][seance2][amphi2][module2][groupePrepaTD2] = 1; //Affecter au prof1 la seance de cours du prof2
-                vois.x[prof2][jour2][seance1][salle1][module1][groupeCycle1] = 1; // Affecter au prof2 la seance du td du prof1
+                vois.y[prof2][seance2][jour2][salle2][module2][groupePrepaTD2] = 0;
+                vois.y[prof1][seance2][jour2][salle2][module2][groupePrepaTD2] = 1;
+                vois.x[prof2][seance1][jour1][salle1][module1][groupePrepaTD1] = 1;
             }
         }
-        else //Si la seance a retier pour le prof1 est une seance de cours
+        else
         {
-            vois.y[prof1][jour1][seance1][amphi1][module1][groupePrepaTD1] = 0; //Retirer la seance de cours du prof1
-            if(vois.x[prof2][jour2][seance2][salle2][module2][groupeCycle2] == 1) // Si la seance a retirer pour le prof2 est une seance de td
+            vois.y[prof1][seance1][jour1][salle1][module1][groupePrepaTD1] = 0;
+            if(vois.x[prof2][seance2][jour2][salle2][module2][groupeCycle2] == 1)
             {
-                vois.x[prof2][jour2][seance2][salle2][module2][groupeCycle2] = 0; //retirer la seance de td du prof2
-                vois.y[prof2][jour1][seance1][amphi1][module1][groupePrepaTD1] = 1; //Donner la seance de cours du prof1 au prof2
-                vois.x[prof1][jour2][seance2][salle2][module2][groupeCycle2] = 1; //Donner la seance de td du prof2 au prof1
+                vois.x[prof2][seance2][jour2][salle2][module2][groupeCycle2] = 0;
+                vois.y[prof2][seance1][jour1][salle1][module1][groupePrepaTD1] = 1;
+                vois.x[prof1][seance2][jour2][salle2][module2][groupeCycle2] = 1;
             }
-            else // Si la seance a retirer pour le prof2 est une seance de cours
+            else
             {
-                vois.y[prof2][jour2][seance2][amphi2][module2][groupePrepaTD2] = 0; //retirer la seance de cours du prof2
-                vois.y[prof2][jour1][seance1][amphi1][module1][groupePrepaTD1] = 1; //Donner la seance de cours du prof1 au prof2
-                vois.y[prof1][jour2][seance2][amphi2][module2][groupePrepaTD2] = 1; //Donner la seance de cours du prof2 au prof1
+                vois.y[prof2][seance2][jour2][salle2][module2][groupePrepaTD2] = 0;
+                vois.y[prof2][seance1][jour1][salle1][module1][groupePrepaTD1] = 1;
+                vois.y[prof1][seance2][jour2][salle2][module2][groupePrepaTD2] = 1;
             }
         }
         return vois;

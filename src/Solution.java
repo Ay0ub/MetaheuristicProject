@@ -2,7 +2,7 @@ public class Solution {
     int[][][][][][] x = new int[getNbrProfs()][getNbrSeance()][getNbrJours()][getNbrSalles()][getNbrModules()][getNbrGroupesCycle()];
     int[][][][][][] y = new int[getNbrProfs()][getNbrSeance()][getNbrJours()][getNbrSalles()][getNbrModules()][getNbrGroupesPrepaTD()];
     int[][][][][][] z = new int[getNbrProfs()][getNbrSeance()][getNbrJours()][getNbrSalles()][getNbrModules()][getNbrGroupesPrepaCours()];
-    int[][][] souhaits;
+    int[][][] souhaits = new int[getNbrProfs()][getNbrSeance()][getNbrJours()];
 
     static int nbrJours=6;
     static int nbrProfs=20;
@@ -17,18 +17,6 @@ public class Solution {
     int[] chargeCycle ;
     int[] chargePrepaTD ;
     int[] chargePrepaCours ;
-
-    /*public Solution() {
-        chargePrepaCours = new int[getNbrModules()];
-        chargePrepaTD = new int[getNbrModules()];
-        chargeCycle = new int[getNbrModules()];
-    }*/
-
-    /*public Solution() {
-        this.x = new int[nbrProfs][nbrSeance][nbrJours][nbrSalles][nbrModules][nbrGroupesCycle];
-        this.y = new int[nbrProfs][nbrSeance][nbrJours][nbrAmphi][nbrModules][nbrGroupesPrepaTD];
-        this.z = new int[nbrProfs][nbrSeance][nbrJours][nbrAmphi][nbrModules][nbrGroupesPrepaCours];
-    }*/
 
     public int[] getChargeCycle() {
         return chargeCycle;
@@ -450,7 +438,7 @@ public class Solution {
                             {
                                 if(this.getX()[i][j][k][l][m][n] == 1)
                                 {
-                                    valeur += (this.getX()[i][j][k][l][m][n] * getSouhaits()[i][j][k]);
+                                    valeur += (getX()[i][j][k][l][m][n] * getSouhaits()[i][j][k]);
                                     souaitEffectue=true;
                                     break;
                                 }

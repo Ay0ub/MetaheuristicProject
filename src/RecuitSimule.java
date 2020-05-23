@@ -18,8 +18,8 @@ public class RecuitSimule {
         return boltzmann;
     }
 
-    public Solution methodeRecuitSimule(Solution SolutionInitiale) {
-        Solution solution= SolutionInitiale;
+    public Solution recuitSimule(Solution Sol) {
+        Solution solution= Sol;
         int compt=0;
         while(compt<=this.nbrIteration) {
             Solution solutionVoisin=Voisinage.meilleurVoisin(Voisinage.generateEnsembleVoisins(solution,nbrVoisins));
