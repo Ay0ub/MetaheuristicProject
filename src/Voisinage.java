@@ -107,4 +107,13 @@ public class Voisinage {
                                 copy[i][j][k][l][m][n] = matrice[i][j][k][l][m][n];
         return copy;
     }
+
+    public static Solution meilleurVoisin(ArrayList<Solution> solutions) {
+        Solution meilleurVoisin = solutions.get(0);
+        for(Solution solution : solutions) {
+            if(solution.fontionObjectif() > meilleurVoisin.fontionObjectif())
+                meilleurVoisin = solution;
+        }
+        return meilleurVoisin;
+    }
 }

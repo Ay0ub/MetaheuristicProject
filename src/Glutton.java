@@ -1,11 +1,14 @@
 public class Glutton {
     private Solution solution;
-    int[][][][][][] val;
+
+    public void setSolution(Solution solution) {
+        this.solution = solution;
+    }
 
     public Glutton()
     {
-        solution = new Solution();
-        solution = remplirEmplois();
+        //solution = new Solution();
+        //solution = remplirEmplois();
     }
 
     public Solution remplirEmplois()
@@ -45,13 +48,14 @@ public class Glutton {
 
     public boolean isXvalide(int professeur,int seance,int jour)
     {
+        int[][][][][][] val = new int[solution.getNbrProfs()][solution.getNbrSeance()][solution.getNbrJours()][solution.getNbrSalles()][solution.getNbrModules()][solution.getNbrGroupesCycle()];
         for(int i=0;i<solution.getNbrSalles();i++)
         {
             for(int j=0;j<solution.getNbrModules();j++)
             {
                 for(int k=0;k<solution.getNbrGroupesCycle();k++)
                 {
-                    if(!solution.contrainteSeanceProf(solution.getX()) || !solution.contrainteSalleSeance(solution.getX()) || !solution.chargeCycleRespecte(solution.getX()))
+                    if(!solution.contrainteSeanceProf(solution.getX(),solution.getY(),solution.getZ()) || !solution.contrainteSalleSeance(solution.getX(),solution.getY()) || !solution.chargeCycleRespecte(solution.getX()))
                     {
                         val[professeur][seance][jour][i][j][k] = 0;
                         solution.setX(val);
@@ -64,18 +68,20 @@ public class Glutton {
                 }
             }
         }
+
         return false;
     }
 
     public boolean isYvalide(int professeur,int seance,int jour)
     {
+        int[][][][][][] val = new int[solution.getNbrProfs()][solution.getNbrSeance()][solution.getNbrJours()][solution.getNbrSalles()][solution.getNbrModules()][solution.getNbrGroupesPrepaTD()];
         for(int i=0;i<solution.getNbrSalles();i++)
         {
             for(int j=0;j<solution.getNbrModules();j++)
             {
                 for(int k=0;k<solution.getNbrGroupesPrepaTD();k++)
                 {
-                    if(!solution.contrainteSeanceProf(solution.getY()) || !solution.contrainteSalleSeance(solution.getY()) || !solution.chargePrepaTDRespecte(solution.getY()))
+                    if(!solution.contrainteSeanceProf(solution.getX(),solution.getY(),solution.getZ()) || !solution.contrainteSalleSeance(solution.getX(),solution.getY()) || !solution.chargePrepaTDRespecte(solution.getY()))
                     {
                         val[professeur][seance][jour][i][j][k] = 0;
                         solution.setY(val);
@@ -93,13 +99,14 @@ public class Glutton {
 
     public boolean isZvalide(int professeur,int seance,int jour)
     {
+        int[][][][][][] val = new int[solution.getNbrProfs()][solution.getNbrSeance()][solution.getNbrJours()][solution.getNbrAmphi()][solution.getNbrModules()][solution.getNbrGroupesPrepaCours()];
         for(int i=0;i<solution.getNbrAmphi();i++)
         {
             for(int j=0;j<solution.getNbrModules();j++)
             {
                 for(int k=0;k<solution.getNbrGroupesPrepaCours();k++)
                 {
-                    if(!solution.contrainteSeanceProf(solution.getZ()) || !solution.contrainteSeanceAmphi(solution.getZ()) || !solution.chargeCycleRespecte(solution.getZ()))
+                    if(!solution.contrainteSeanceProf(solution.getX(),solution.getY(),solution.getZ()) || !solution.contrainteSeanceAmphi(solution.getZ()) || !solution.chargePrepaCoursRespecte(solution.getZ()))
                     {
                         val[professeur][seance][jour][i][j][k] = 0;
                         solution.setZ(val);

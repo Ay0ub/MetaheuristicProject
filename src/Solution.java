@@ -1,7 +1,7 @@
 public class Solution {
-    int[][][][][][] x;
-    int[][][][][][] y;
-    int[][][][][][] z;
+    int[][][][][][] x = new int[getNbrProfs()][getNbrSeance()][getNbrJours()][getNbrSalles()][getNbrModules()][getNbrGroupesCycle()];
+    int[][][][][][] y = new int[getNbrProfs()][getNbrSeance()][getNbrJours()][getNbrSalles()][getNbrModules()][getNbrGroupesPrepaTD()];
+    int[][][][][][] z = new int[getNbrProfs()][getNbrSeance()][getNbrJours()][getNbrSalles()][getNbrModules()][getNbrGroupesPrepaCours()];
     int[][][] souhaits;
 
     static int nbrJours=6;
@@ -24,11 +24,11 @@ public class Solution {
         chargeCycle = new int[getNbrModules()];
     }*/
 
-    public Solution() {
-        this.x = new int[nbrProfs][nbrJours][nbrSeance][nbrSalles][nbrModules][nbrGroupesCycle];
-        this.y = new int[nbrProfs][nbrJours][nbrSeance][nbrAmphi][nbrModules][nbrGroupesPrepaTD];
-        this.z = new int[nbrProfs][nbrJours][nbrSeance][nbrAmphi][nbrModules][nbrGroupesPrepaCours];
-    }
+    /*public Solution() {
+        this.x = new int[nbrProfs][nbrSeance][nbrJours][nbrSalles][nbrModules][nbrGroupesCycle];
+        this.y = new int[nbrProfs][nbrSeance][nbrJours][nbrAmphi][nbrModules][nbrGroupesPrepaTD];
+        this.z = new int[nbrProfs][nbrSeance][nbrJours][nbrAmphi][nbrModules][nbrGroupesPrepaCours];
+    }*/
 
     public int[] getChargeCycle() {
         return chargeCycle;
@@ -163,13 +163,13 @@ public class Solution {
      * @param var
      * @return
      */
-    public boolean contrainteSeanceProf(int[][][][][][] var)
+    public boolean contrainteSeanceProf(int[][][][][][] var1,int[][][][][][] var2,int[][][][][][] var3)
     {
-        for (int i=0;i<getNbrJours();i++)
+        for (int i=0;i<getNbrProfs();i++)
         {
-            for (int j=0;j<getNbrProfs();j++)
+            for (int j=0;j<getNbrSeance();j++)
             {
-                for (int k=0;k<getNbrSeance();k++)
+                for (int k=0;k<getNbrJours();k++)
                 {
                     int cpt = 0;
                     for (int l=0;l<getNbrSalles();l++)
@@ -178,23 +178,9 @@ public class Solution {
                         {
                             for (int n=0;n<getNbrGroupesCycle();n++)
                             {
-                                if(var[i][j][k][l][m][n] != 0)
+                                if(var1[i][j][k][l][m][n] != 0)
                                 {
-                                    cpt+=var[i][j][k][l][m][n];
-                                }
-                            }
-                        }
-                    }
-
-                    for (int l=0;l<getNbrSalles();l++)
-                    {
-                        for (int m=0;m<getNbrModules();m++)
-                        {
-                            for (int n=0;n<getNbrGroupesPrepaCours();n++)
-                            {
-                                if(var[i][j][k][l][m][n] != 0)
-                                {
-                                    cpt+=var[i][j][k][l][m][n];
+                                    cpt+=var1[i][j][k][l][m][n];
                                 }
                             }
                         }
@@ -206,9 +192,23 @@ public class Solution {
                         {
                             for (int n=0;n<getNbrGroupesPrepaTD();n++)
                             {
-                                if(var[i][j][k][l][m][n] != 0)
+                                if(var2[i][j][k][l][m][n] != 0)
                                 {
-                                    cpt+=var[i][j][k][l][m][n];
+                                    cpt+=var2[i][j][k][l][m][n];
+                                }
+                            }
+                        }
+                    }
+
+                    for (int l=0;l<getNbrAmphi();l++)
+                    {
+                        for (int m=0;m<getNbrModules();m++)
+                        {
+                            for (int n=0;n<getNbrGroupesPrepaCours();n++)
+                            {
+                                if(var3[i][j][k][l][m][n] != 0)
+                                {
+                                    cpt+=var3[i][j][k][l][m][n];
                                 }
                             }
                         }
@@ -229,38 +229,38 @@ public class Solution {
      * @param var
      * @return
      */
-    public boolean contrainteSalleSeance(int[][][][][][] var)
+    public boolean contrainteSalleSeance(int[][][][][][] var1,int[][][][][][] var2)
     {
-        for (int i=0;i<getNbrJours();i++)
+        for (int jour=0;jour<getNbrJours();jour++)
         {
-            for (int j=0;j<getNbrSalles();j++)
+            for (int salle=0;salle<getNbrSalles();salle++)
             {
-                for (int k=0;k<getNbrSeance();k++)
+                for (int seance=0;seance<getNbrSeance();seance++)
                 {
                     int cpt = 0;
-                    for (int l=0;l<getNbrProfs();l++)
+                    for (int prof=0;prof<getNbrProfs();prof++)
                     {
-                        for (int m=0;m<getNbrModules();m++)
+                        for (int module=0;module<getNbrModules();module++)
                         {
-                            for (int n=0;n<getNbrGroupesCycle();n++)
+                            for (int cycle=0;cycle<getNbrGroupesCycle();cycle++)
                             {
-                                if(var[i][j][k][l][m][n] != 0)
+                                if(var1[prof][seance][jour][salle][module][cycle] != 0)
                                 {
-                                    cpt+=var[i][j][k][l][m][n];
+                                    cpt+=var1[prof][seance][jour][salle][module][cycle];
                                 }
                             }
                         }
                     }
 
-                    for (int l=0;l<getNbrProfs();l++)
+                    for (int prof=0;prof<getNbrProfs();prof++)
                     {
-                        for (int m=0;m<getNbrModules();m++)
+                        for (int module=0;module<getNbrModules();module++)
                         {
-                            for (int n=0;n<getNbrGroupesPrepaTD();n++)
+                            for (int td=0;td<getNbrGroupesPrepaTD();td++)
                             {
-                                if(var[i][j][k][l][m][n] != 0)
+                                if(var2[prof][seance][jour][salle][module][td] != 0)
                                 {
-                                    cpt+=var[i][j][k][l][m][n];
+                                    cpt+=var2[prof][seance][jour][salle][module][td];
                                 }
                             }
                         }
@@ -283,23 +283,23 @@ public class Solution {
      */
     public boolean contrainteSeanceAmphi(int[][][][][][] var)
     {
-        for (int i=0;i<getNbrJours();i++)
+        for (int jour=0;jour<getNbrJours();jour++)
         {
-            for (int j=0;j<getNbrAmphi();j++)
+            for (int amphi=0;amphi<getNbrAmphi();amphi++)
             {
-                for (int k=0;k<getNbrSeance();k++)
+                for (int seance=0;seance<getNbrSeance();seance++)
                 {
                     int cpt = 0;
 
-                    for (int l=0;l<getNbrProfs();l++)
+                    for (int prof=0;prof<getNbrProfs();prof++)
                     {
-                        for (int m=0;m<getNbrModules();m++)
+                        for (int module=0;module<getNbrModules();module++)
                         {
-                            for (int n=0;n<getNbrGroupesPrepaCours();n++)
+                            for (int groupe=0;groupe<getNbrGroupesPrepaCours();groupe++)
                             {
-                                if(var[i][j][k][l][m][n] != 0)
+                                if(var[prof][seance][jour][amphi][module][groupe] != 0)
                                 {
-                                    cpt+=var[i][j][k][l][m][n];
+                                    cpt+=var[prof][seance][jour][amphi][module][groupe];
                                 }
                             }
                         }
@@ -323,28 +323,28 @@ public class Solution {
      */
     public boolean chargeCycleRespecte(int[][][][][][] val)
     {
-        for(int i=0;i<getNbrModules();i++)
+        for(int module=0;module<getNbrModules();module++)
         {
-            for (int j=0;j<getNbrGroupesCycle();j++)
+            for (int groupe=0;groupe<getNbrGroupesCycle();groupe++)
             {
                 int valeur = 0;
-                for (int k=0;k<getNbrJours();k++)
+                for (int jour=0;jour<getNbrJours();jour++)
                 {
-                    for (int l=0;l<getNbrSeance();l++)
+                    for (int seance=0;seance<getNbrSeance();seance++)
                     {
-                        for (int m=0;m<getNbrProfs();m++)
+                        for (int prof=0;prof<getNbrProfs();prof++)
                         {
-                            for (int n=0;n<getNbrSalles();n++)
+                            for (int salle=0;salle<getNbrSalles();salle++)
                             {
-                                if (val[i][j][k][l][m][n] != 0)
+                                if (val[prof][seance][jour][salle][module][groupe] != 0)
                                 {
-                                    valeur += val[i][j][k][l][m][n];
+                                    valeur += val[prof][seance][jour][salle][module][groupe];
                                 }
                             }
                         }
                     }
                 }
-                if(valeur>chargeCycle[i])
+                if(valeur>chargeCycle[module])
                 {
                     return false;
                 }
@@ -374,9 +374,9 @@ public class Solution {
                         {
                             for (int n=0;n<getNbrSalles();n++)
                             {
-                                if (val[i][j][k][l][m][n] != 0)
+                                if (val[m][l][k][n][i][j] != 0)
                                 {
-                                    valeur += val[i][j][k][l][m][n];
+                                    valeur += val[m][l][k][n][i][j];
                                 }
                             }
                         }
@@ -399,28 +399,28 @@ public class Solution {
      */
     public boolean chargePrepaCoursRespecte(int[][][][][][] val)
     {
-        for(int i=0;i<getNbrModules();i++)
+        for(int module=0;module<getNbrModules();module++)
         {
-            for (int j=0;j<getNbrGroupesPrepaCours();j++)
+            for (int groupe=0;groupe<getNbrGroupesPrepaCours();groupe++)
             {
                 int valeur = 0;
-                for (int k=0;k<getNbrJours();k++)
+                for (int jour=0;jour<getNbrJours();jour++)
                 {
-                    for (int l=0;l<getNbrSeance();l++)
+                    for (int seance=0;seance<getNbrSeance();seance++)
                     {
-                        for (int m=0;m<getNbrProfs();m++)
+                        for (int prof=0;prof<getNbrProfs();prof++)
                         {
-                            for (int n=0;n<getNbrSalles();n++)
+                            for (int amphi=0;amphi<getNbrAmphi();amphi++)
                             {
-                                if (val[i][j][k][l][m][n] != 0)
+                                if (val[prof][seance][jour][amphi][module][groupe] != 0)
                                 {
-                                    valeur += val[i][j][k][l][m][n];
+                                    valeur += val[prof][seance][jour][amphi][module][groupe];
                                 }
                             }
                         }
                     }
                 }
-                if(valeur>chargePrepaCours[i])
+                if(valeur>chargePrepaCours[module])
                 {
                     return false;
                 }
@@ -478,7 +478,7 @@ public class Solution {
                         if (souaitEffectue) break;
                     }
 
-                    for (int l=0;l<getNbrSalles();l++)
+                    for (int l=0;l<getNbrAmphi();l++)
                     {
                         for (int m=0;m<getNbrModules();m++)
                         {
