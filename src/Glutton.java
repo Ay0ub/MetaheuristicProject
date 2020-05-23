@@ -5,11 +5,6 @@ public class Glutton {
         this.solution = solution;
     }
 
-    public Glutton()
-    {
-        //solution = new Solution();
-        //solution = remplirEmplois();
-    }
 
     public Solution remplirEmplois()
     {
